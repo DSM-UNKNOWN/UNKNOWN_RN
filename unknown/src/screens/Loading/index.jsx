@@ -3,11 +3,13 @@ import { View, StyleSheet } from "react-native";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
+import Logo from "../../assets/icon/Logo";
+
 const LoadingPage = ({navigation}) => {
 
     return(
         <View style={Styles.container}>
-            <></>
+            <Logo></Logo>
          </View>
     );
 }
