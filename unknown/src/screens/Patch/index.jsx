@@ -37,7 +37,7 @@ const PatchPage = ({navigation}) => {
                             <CustomText style={Styles.data}>대전소방서</CustomText>
                         </View>
                     </View>
-                    <Button innerText="정보 수정하기" onPress={() => navigation.navigate('PatchPage', { screen: 'PatchPage'})} />
+                    <Button innerText="정보 수정하기" onPress={() => navigation.navigate('DataPage', { screen: 'DataPage'})} />
                 </View>
                 <TouchableOpacity style={Styles.btn} onPress={() => console.log('logout')}>
                     <CustomText style={Styles.boldFont}>로그아웃</CustomText>
