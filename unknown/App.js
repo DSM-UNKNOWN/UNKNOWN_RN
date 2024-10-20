@@ -17,9 +17,9 @@ export default class extends React.Component{
 
   render(){
     if(this.state.isLoading){
-
+      
       return <LoadingPage />
-
+        
     }else{
 
       return (
@@ -27,6 +27,7 @@ export default class extends React.Component{
           <UserScreen />
         </NavigationContainer>
       );
+      
     }
   }
 }
