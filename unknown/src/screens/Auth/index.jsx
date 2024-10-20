@@ -30,10 +30,10 @@ const LoginPage = ({navigation}) => {
                     <Input innerText="비밀번호" state={true} onGetInText={(text) => handleInputChange(text, "userpw")} />
                 </View>
                 <View style={Styles.btnCotainer}>
-                    <Button innerText="로그인" onPress={() => console.log('login')} />
+                    <Button innerText="로그인" onPress={() => navigation.navigate("MainScreen", { screen: 'MainScreen' })} />
                     <View style={Styles.btnTextCotainer}>
                         <Text style={Styles.font}>아직 계정이 없으신가요?</Text>
-                        <TouchableOpacity onPress={() => console.log('signup')}>
+                        <TouchableOpacity onPress={() => navigation.navigate("SignupPage", { screen: 'SignupPage' })}>
                             <Text style={Styles.fontBtn}>회원가입</Text>
                         </TouchableOpacity>
                     </View>
