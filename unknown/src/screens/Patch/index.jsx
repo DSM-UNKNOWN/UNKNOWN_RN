@@ -7,8 +7,8 @@ import Back from "../../assets/icon/Back";
 import CustomText from '../../styles/CustomText';
 import Button from "../../components/Button";
 
-import Delete from '../../assets/icon/delete';
-import Logout from '../../assets/icon/logout';
+import Delete from '../../assets/icon/Delete';
+import Logout from '../../assets/icon/Logout';
 
 const PatchPage = ({navigation}) => {
 
