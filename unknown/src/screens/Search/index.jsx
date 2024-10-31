@@ -27,11 +27,17 @@ const SearchPage = ({navigation}) => {
                     latitudeDelta: 0.431948,
                     longitudeDelta: 0.372948,
                 }}
+                showsUserLocation={true}
+                showsMyLocationButton={true}
                 >
-                    <Marker
-                        coordinate={{latitude: 36.321655, longitude: 127.378953}}
-                        title="this is a marker"
-                    />
+                    {/* {list.map((item, index) => (
+                        <Marker
+                            coordinate={{latitude: item.latitude, longitude: item.longitude }}
+                            title={item.title}
+                            description={item.description}
+                            key={index}
+                        />
+                    ))} */}
                 </MapView>
                 <Button innerText="환자 정보 입력하기" onPress={() => navigation.navigate("InputPage", { screen: 'InputPage' })} />
             </View>

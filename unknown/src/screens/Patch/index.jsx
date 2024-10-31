@@ -10,7 +10,40 @@ import Button from "../../components/Button";
 import Delete from '../../assets/icon/Delete';
 import Logout from '../../assets/icon/Logout';
 
+import onLogout from '../../apis/LogoutAPI';
+import onGetUser from "../../apis/GetUserAPI";
+import onDelete from '../../apis/DeleteUserAPI';
+
 const PatchPage = ({navigation}) => {
+    const [userData, setUserData] = useState();
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        const res = await onGetUser();
+        if(res) {
+            console.log(res);
+            setUserData(res);
+        }
+    };
+
+    const onPressLogout = async () => {
+        const res = await onLogout();
+        if(res) {
+            console.log('logout');
+            navigation.navigate("LoginPage", { screen: 'LoginPage' });
+        }
+    }
+
+    const onPressDelete = async () => {
+        const res = await onDelete();
+        if(res) { 
+            console.log('delete');
+            navigation.navigate("LoginPage", { screen: "LoginPage" });
+        }
+    }
 
     return(
         <View style={Styles.container}>
@@ -31,19 +64,19 @@ const PatchPage = ({navigation}) => {
                             <CustomText style={Styles.font}>소속</CustomText>
                         </View>
                         <View style={Styles.fontCotainer}>
-                            <CustomText style={Styles.data}>000</CustomText>
-                            <CustomText style={Styles.data}>TESTTEST</CustomText>
-                            <CustomText style={Styles.data}>010-1234-5678</CustomText>
-                            <CustomText style={Styles.data}>대전소방서</CustomText>
+                            <CustomText style={Styles.data}>{userData ? userData.name : null}</CustomText>
+                            <CustomText style={Styles.data}>{userData ? userData.userid : null}</CustomText>
+                            <CustomText style={Styles.data}>{userData ? userData.phone : null}</CustomText>
+                            <CustomText style={Styles.data}>{userData ? userData.connect : null}</CustomText>
                         </View>
                     </View>
                     <Button innerText="정보 수정하기" onPress={() => navigation.navigate('DataPage', { screen: 'DataPage'})} />
                 </View>
-                <TouchableOpacity style={Styles.btn} onPress={() => console.log('logout')}>
+                <TouchableOpacity style={Styles.btn} onPress={() => onPressLogout()}>
                     <CustomText style={Styles.boldFont}>로그아웃</CustomText>
                     <Logout />
                 </TouchableOpacity>
-                <TouchableOpacity style={Styles.btn} onPress={() => console.log('delete')}>
+                <TouchableOpacity style={Styles.btn} onPress={() => onPressDelete()}>
                     <CustomText style={Styles.boldFont}>회원 탈퇴하기</CustomText>
                     <Delete />
                 </TouchableOpacity>

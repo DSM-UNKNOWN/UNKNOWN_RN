@@ -10,7 +10,21 @@ import Data from "../../assets/icon/Data";
 import Patch from "../../assets/icon/Patch";
 import Search from "../../assets/icon/Search";
 
+import onGetUser from '../../apis/GetUserAPI';
+
 const MainPage = ({navigation}) => {
+    const [userData, setUserData] = useState();
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        const res = await onGetUser();
+        if(res) {
+            setUserData(res);
+        }
+    };
 
     return(
         <View style={Styles.container}>
@@ -20,7 +34,7 @@ const MainPage = ({navigation}) => {
             <View style={Styles.body}>
                 <View style={Styles.btn}>
                     <View style={Styles.fontContainer}>
-                        <CustomText style={Styles.boldFont}>000님</CustomText>
+                        <CustomText style={Styles.boldFont}>{userData ? userData.name : null}님</CustomText>
                         <CustomText style={Styles.font}>오늘도 힘내세요</CustomText>
                     </View>
                     <Data />
