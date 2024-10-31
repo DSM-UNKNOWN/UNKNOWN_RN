@@ -5,8 +5,9 @@ import constants from "../../styles/constants";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-
 import TextLogo from "../../assets/icon/TextLogo";
+
+import onSignup from '../../apis/SignupAPI';
 
 const SignupPage = ({navigation}) => {
     const [signupData, setSignupData] = useState({
@@ -24,6 +25,19 @@ const SignupPage = ({navigation}) => {
         }));
       };
 
+    const onClickSignup = async () => {
+        if(signupData !== null) {
+            try {
+                const signupState = await onSignup(signupData);
+                if (signupState) {
+                  navigation.navigate("LoginPage", { screen: 'LoginPage' });
+                }
+            } catch (error) {
+                console.log("회원가입 오류");
+            }
+        }
+    };
+
     return(
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={Styles.container}>
@@ -35,7 +49,7 @@ const SignupPage = ({navigation}) => {
                     <Input innerText="전화번호 ex)01012345678" state={false} onGetInText={(text) => handleInputChange(text, "phone")} />
                     <Input innerText="소속 ex)대전소방서" state={false} onGetInText={(text) => handleInputChange(text, "connect")} />
                 </View>
-                <Button innerText="회원가입" onPress={() => navigation.navigate("LoginPage", { screen: 'LoginPage' })} />
+                <Button innerText="회원가입" onPress={() => onClickSignup()} />
             </View>
         </TouchableWithoutFeedback>
     );

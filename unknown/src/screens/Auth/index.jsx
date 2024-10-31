@@ -5,8 +5,9 @@ import constants from "../../styles/constants";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-
 import TextLogo from "../../assets/icon/TextLogo";
+
+import onLogin from '../../apis/LoginAPI';
 
 const LoginPage = ({navigation}) => {
     const [loginData, setLoginData] = useState({
@@ -21,6 +22,19 @@ const LoginPage = ({navigation}) => {
         }));
       };
 
+    const onClickLogin = async () => {
+        if(loginData !== null) {
+            try {
+                const loginState = await onLogin(loginData);
+                if (loginState) {
+                  navigation.navigate("MainScreen", { screen: 'MainScreen' });
+                }
+            } catch (error) {
+                console.log("로그인 오류");
+            }
+        }
+    };
+
     return(
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={Styles.container}>
@@ -30,7 +44,7 @@ const LoginPage = ({navigation}) => {
                     <Input innerText="비밀번호" state={true} onGetInText={(text) => handleInputChange(text, "userpw")} />
                 </View>
                 <View style={Styles.btnCotainer}>
-                    <Button innerText="로그인" onPress={() => navigation.navigate("MainScreen", { screen: 'MainScreen' })} />
+                    <Button innerText="로그인" onPress={() => onClickLogin()} />
                     <View style={Styles.btnTextCotainer}>
                         <Text style={Styles.font}>아직 계정이 없으신가요?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate("SignupPage", { screen: 'SignupPage' })}>
